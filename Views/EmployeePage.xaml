@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="MauiApp1.EmployeePage"
+             Title="Добро пожаловать" BackgroundColor="White">
+    <VerticalStackLayout>
+        <VerticalStackLayout Padding="30,0" Spacing="25"  IsVisible="true" x:Name="EmployeeLayout">
+            <zxing:CameraBarcodeReaderView x:Name="QrReader" HeightRequest="300" WidthRequest="300"
+                                           IsTorchOn="False" IsVisible="False" BarcodesDetected="QrReader_BarcodesDetected"/>
+
+            <Button x:Name="ScanButton" Text="Сканировать" Clicked="ScanButton_Clicked" HorizontalOptions="Fill"/>
+
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
