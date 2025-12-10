@@ -1,55 +1,79 @@
+
+
+using MauiApp1.Properties;
+
 namespace MauiApp1;
 
 public partial class LoginPage : ContentPage
 {
-	private bool isEmployee;
-	private readonly Dictionary<string, string> Users = new Dictionary<string, string>()
+    private Label message = new Label();
+    private bool isEmployee;
+	public readonly Dictionary<string, string> users = new Dictionary<string, string>()
 	{
-		{"Student", "Student1"},
-		{"Employee", "Employee"}
+		{"Student1", "student"},
+		{"Student2", "student"},
+		{"Employee1", "employee"}
 	};
 	public LoginPage()
 	{
 		InitializeComponent();
-
-	}
+        message.TextColor = Color.FromArgb("#FF0000");
+        message.Text = "Неправильный логин или пароль";
+        message.HorizontalTextAlignment = TextAlignment.Center;
+        message.VerticalTextAlignment = TextAlignment.Center;
+    }
 
 	public bool CheckCurrency()
 	{
 
-		if (Users.ContainsKey(LoginEntry.Text.TrimEnd()))
+		if (users.ContainsKey(LoginEntry.Text.TrimEnd()))
 		{
-			if (Users[LoginEntry.Text.TrimEnd()] == PasswordEntry.Text)
+			if (users[LoginEntry.Text.TrimEnd()] == PasswordEntry.Text)
 			{
-				if (Users[LoginEntry.Text.TrimEnd()] == "Employee")
+				if (LoginEntry.Text.Contains("Employee"))
 				{
 					isEmployee = true;
+					
+                    return true;
 				}
 				else
 				{
 					isEmployee = false;
+					return true;
 				}
 			}
-			else return false;
 		}
-		return false;
+        IncorectLabel();
+        return false;
 	}
 	
+	private void IncorectLabel()
+	{
+        LoginLayout.Children.Remove(message);
+        LoginLayout.Children.Add(message);
+    }
+
     private void Button_Clicked(object sender, EventArgs e)
     {
-		var message = new Label();
-		if(LoginEntry is null || PasswordEntry is null)
+		
+		if (LoginEntry.Text is null || PasswordEntry.Text is null)
 		{
-			message.TextColor = 
-			LoginLayout.Children.Add(message);
+			IncorectLabel();
 		}
-		if (CheckCurrency() && isEmployee)
+		else
 		{
-			Shell.Current.GoToAsync("//EmployeePage");
+			if (CheckCurrency()) {
+                Users.loged.Item1 = LoginEntry.Text.TrimEnd();
+                Users.loged.Item2 = PasswordEntry.Text;
+                if (isEmployee)
+				{
+					Shell.Current.GoToAsync("//EmployeePage");
+				}
+				else if (!isEmployee)
+				{
+					Shell.Current.GoToAsync("//StudentPage");
+				} 
+			}
 		}
-		else if(CheckCurrency() && !isEmployee)
-		{
-            Shell.Current.GoToAsync("//StudentPage");
-        }
     }
 }

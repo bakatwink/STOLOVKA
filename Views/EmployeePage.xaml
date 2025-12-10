@@ -3,15 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="MauiApp1.EmployeePage"
-             Title="Добро пожаловать" BackgroundColor="White">
-    <VerticalStackLayout>
-        <VerticalStackLayout Padding="30,0" Spacing="25"  IsVisible="true" x:Name="EmployeeLayout">
-            <zxing:CameraBarcodeReaderView x:Name="QrReader" HeightRequest="300" WidthRequest="300"
-                                           IsTorchOn="False" IsVisible="False" BarcodesDetected="QrReader_BarcodesDetected"/>
+             Title="Добро пожаловать">
 
+    <Grid x:Name="EmployeeGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--<zxing:CameraBarcodeReaderView x:Name="QrReader" HorizontalOptions="Center" VerticalOptions="Center" MinimumHeightRequest="100" MinimumWidthRequest="100" MaximumHeightRequest="300" MaximumWidthRequest="300"
+                           IsTorchOn="False" BarcodesDetected="QrReader_BarcodesDetected" Grid.Row="0" />-->
+        <VerticalStackLayout Grid.Row="1" Padding="30,0" Spacing="25"  IsVisible="true" x:Name="EmployeeLayout">
+            
+            <Label x:Name="ScanLabel" Text="Сканируйте QR-код" IsVisible="False" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,10,0,0" FontSize="20"/>
+            <Button x:Name="StopScanButton" Text="Убрать" Clicked="StopScanButton_Clicked" HorizontalOptions="Fill" IsVisible="False"/>
             <Button x:Name="ScanButton" Text="Сканировать" Clicked="ScanButton_Clicked" HorizontalOptions="Fill"/>
 
-
         </VerticalStackLayout>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
