@@ -44,7 +44,7 @@ public partial class EmployeePage : ContentPage
         {
             Dispatcher.Dispatch(() => { DisplayAlert("Ошибка", $"Неизвесный QR-код", "OK"); });
         }
-        QrReader.IsDetecting = false;
+        QrReader.IsDetecting = false;//afasf
         ScanLabel.IsVisible = false;
         EmployeeGrid.Remove(QrReader);
         StopScanButton.IsVisible = false;
